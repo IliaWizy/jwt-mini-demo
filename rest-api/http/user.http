@@ -1,0 +1,61 @@
+@userPass = 123
+
+
+### Проверка Get запроса. Ответ 200.
+GET http://localhost:8080/user
+Authorization: Bearer {{bearer_admin}}
+#Authorization: Bearer {{bearer_user}}
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+> {%
+  client.global.set( "userId", response.body[0].id );
+%}
+
+
+### Добавление нового пользователя. Ответ 201.
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "email": "aasd@dfs.com",
+  "password": "123"
+}
+> {%
+  console.log( response.body );
+%}
+
+
+### Проверка Get запроса. Ответ 200.
+GET http://localhost:8080/user
+
+> {%
+  console.log( response.body );
+%}
+
+
+### Поиск по UUID. Ответ 200.
+GET http://localhost:8080/user/{{userId}}
+
+> {%
+  console.log( response.body );
+%}
+
+
+### Проверка Get запроса. Ответ 200.
+GET http://localhost:8080/user
+
+> {%
+  console.log( response.body );
+%}
+
+
+### Удаление пользователя. Ответ 200.
+DELETE http://localhost:8080/user/{{userId}}
+
+
+### Проверка Get запроса. Ответ 204.
+GET http://localhost:8080/user
+
+> {%
+  console.log( response.body );
+%}

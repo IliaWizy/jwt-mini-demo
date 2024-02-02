@@ -1,0 +1,12 @@
+logging:
+  level:
+    root: info
+
+spring:
+  main:
+    banner-mode: off
+
+jwt:
+  key: ${JWT_KEY}
+  access-token-expiration: 10000
+  refresh-token-expiration: 86400000

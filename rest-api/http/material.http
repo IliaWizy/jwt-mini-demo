@@ -1,0 +1,6 @@
+### Проверка Get запроса. Ответ 200.
+GET http://localhost:8080/material
+
+### Проверка Get запроса с токеном. Ответ 200.
+GET http://localhost:8080/material
+Authorization: Bearer {{bearer_admin}}

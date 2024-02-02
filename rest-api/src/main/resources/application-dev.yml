@@ -1,0 +1,21 @@
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    url: jdbc:postgresql://localhost:5516/wizy_api
+    username: dlr
+    password:
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    locations: classpath:db/migration, classpath:db/migration_dev
+
+
+logging:
+  level:
+    root: info
+    org.springframework.security: trace
+
+jwt:
+  key: ${JWT_KEY}
+  access-token-expiration: 10000
+  refresh-token-expiration: 864000

@@ -1,0 +1,42 @@
+
+### Аутентификация Admin. Ответ 201.
+POST http://localhost:8080/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "id@gmail.com",
+  "password": "pass"
+}
+> {%
+  client.global.set( "bearer_admin", response.body.accessToken );
+  client.global.set( "bearer_admin_refresh", response.body.refreshToken );
+%}
+
+### Аутентификация User. Ответ 201.
+POST http://localhost:8080/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "Jane@gmail.com",
+  "password": "asdasd"
+}
+> {%
+  client.global.set( "bearer_user", response.body.accessToken );
+  client.global.set( "bearer_user_refresh", response.body.refreshToken );
+
+%}
+
+
+###  Обновление рефреш токена Admin. Ответ 200.
+POST http://localhost:8080/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{bearer_admin_refresh}}"
+}
+> {%
+  console.log( response.body );
+  client.global.set( "bearer_admin", response.body.accessToken );
+  client.global.set( "bearer_admin_refresh", response.body.refreshToken );
+
+%}
